@@ -20,7 +20,7 @@ A REST api written in Django for people with deadlines
 * #### Dependencies
     1. Cd into your the cloned repo as such:
         ```bash
-            $ cd Django_api
+            $ cd Blog
         ```
     2. Create and fire up your virtual environment:
         ```bash
