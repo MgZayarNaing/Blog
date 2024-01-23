@@ -15,8 +15,6 @@ class HomeModel(models.Model):
     def __str__(self):
         return self.title
 
-
-# Create your models here.
 class BlogModel(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     img = models.ImageField(default=None)
@@ -37,3 +35,15 @@ class AboutModle(models.Model):
 
     def __str__(self):
         return self.title
+
+class ContactModel(models.Model):
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    firstname = models.CharField(max_length=10, null=True, blank=True)
+    lastname = models.CharField(max_length=10, null=True, blank=True)
+    email = models.EmailField()
+    subject = models.CharField(max_length=500, null=True, blank=True)    
+    meassage = models.TextField() 
+    created_at = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return self.firstname

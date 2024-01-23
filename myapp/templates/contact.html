@@ -19,11 +19,12 @@
 
             <div class="col-md-12 col-lg-12">
 
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" method="post" >
+                    {% csrf_token %}
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label for="firstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name" value=""
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name" value="" name="firstname"
                                 required>
                             <div class="invalid-feedback">
                                 Valid first name is required.
@@ -32,7 +33,7 @@
 
                         <div class="col-sm-6">
                             <label for="lastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Last Name" value=""
+                            <input type="text" class="form-control" id="lastName" placeholder="Last Name" value="" name="lastname"
                                 required>
                             <div class="invalid-feedback">
                                 Valid last name is required.
@@ -42,7 +43,7 @@
                         <div class="col-12">
                             <label for="email" class="form-label">Email <span
                                     class="text-body-secondary"></span></label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter Your Email Address">
+                            <input type="email" class="form-control" id="email" placeholder="Enter Your Email Address" name="email">
                             <div class="invalid-feedback">
                                 Please enter a valid email address for contact updates.
                             </div>
@@ -50,12 +51,12 @@
 
                         <div class="col-12">
                             <label for="subject" class="form-label">SUBJECT</label>
-                            <input type="text" class="form-control" placeholder="SUBJECT">
+                            <input type="text" class="form-control" placeholder="SUBJECT" name="subject">
                         </div>
 
                         <div class="col-12">
                             <label for="exampleFormControlTextarea1">Message</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Message"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Message" name="message"></textarea>
                         </div>
                     </div>
                     <button class="w-100 btn btn-primary btn-lg mt-4" type="submit">Send Message</button>
