@@ -8,24 +8,49 @@
 <main>
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <a href="#" style="text-decoration: none;">
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img class="bd-placeholder-img card-img-top" src="{{blogdetail.img.url}}" alt="Image Not Found"
-                                width="100%" height="225">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-body-secondary">{{blogdetail.created_at}}</small>
-                                    <small class="text-body-secondary">{{blogdetail.author}}</small>
+
+
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img class="bd-placeholder-img card-img-top" src="{{blogdetail.img.url}}" alt="Image Not Found"
+                        width="100%" height="100%">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-body-secondary">{{blogdetail.created_at}}</small>
+                            <small class="text-body-secondary">{{blogdetail.author}}</small>
+                        </div>
+                        <h2>{{blogdetail.title}}</h2>
+                        <p class="card-text">{{blogdetail.contact}}</p>
+                    </div>
+                </div>
+            </div>
+           
+
+            <div class="album py-5 bg-body-tertiary">
+            <h2 class="">Latest Post</h2>
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        {% for p in blog %}
+                        <div class="col" onclick="window.location='/app/blogdetail/{{ p.uuid }}/ ' ">
+                            <div class="card shadow-sm">
+                                <img class="bd-placeholder-img card-img-top" src="{{p.img.url}}" alt="Image Not Found"
+                                    width="100%" height="225">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-body-secondary">{{p.created_at}}</small>
+                                        <small class="text-body-secondary">{{p.author}}</small>
+                                    </div>
+                                    <h2>{{p.title}}</h2>
+                                    <p class="card-text">{{p.contact}}</p>
                                 </div>
-                                <h2>{{blogdetail.title}}</h2>
-                                <p class="card-text">{{blogdetail.contact}}</p>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
-                </a>
+                </div>
             </div>
+
+
         </div>
     </div>
 </main>

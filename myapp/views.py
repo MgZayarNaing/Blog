@@ -1,4 +1,7 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required,permission_required
+from django.contrib import messages
 from myapp.models import HomeModel,BlogModel,AboutModle,ContactModel
 # Create your views here.
 
@@ -12,9 +15,11 @@ def BlogSection(request):
     blog = BlogModel.objects.all()
     return render(request, 'blog.html', {'blog':blog})
 
+@login_required(login_url='login')
 def BlogDetailSection(request,blog_id):
     blogdetail = BlogModel.objects.get(uuid=blog_id)
-    return render(request, 'blog_detail.html', {'blogdetail':blogdetail})
+    blog = BlogModel.objects.all().order_by('-created_at')[:3]
+    return render(request, 'blog_detail.html', {'blogdetail':blogdetail, 'blog':blog})
 
 def AboutSection(request):
     about = AboutModle.objects.all()
@@ -35,3 +40,18 @@ def ContactSection(request):
             meassage = request.POST.get('message'),
         )
         return redirect('/app/home/')
+
+def loginSection(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username = username, password = password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "You are now logged in as "+ username)
+            return redirect('/app/home/')
+        else:
+            messages.error(request, "Username or Password is incorrect!")
+            return render(request, 'login.html')
