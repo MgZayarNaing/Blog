@@ -3,7 +3,22 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required,permission_required
 from django.contrib import messages
 from myapp.models import HomeModel,BlogModel,AboutModle,ContactModel
+from django.db.models import Q
+from django.contrib.auth.models import User
 # Create your views here.
+
+def SearchSection(request):
+    search = request.GET.get('search')
+    home = HomeModel.objects.all()
+    if search:
+        blog = BlogModel.objects.filter(
+            Q(title__icontains=search) |
+            Q(contact__icontains=search)
+            )
+        return render(request, 'blog.html', {'blog':blog})
+    else:
+        blog = BlogModel.objects.all().order_by('-created_at')
+        return render(request, 'blog.html', {'blog': blog})
 
 def HomeSection(request):
     home = HomeModel.objects.all()
@@ -55,3 +70,9 @@ def loginSection(request):
         else:
             messages.error(request, "Username or Password is incorrect!")
             return render(request, 'login.html')
+
+
+def LogoutSection(request):
+    logout(request)
+    messages.success(request, "You are now logout! ")
+    return redirect('/app/blog/')

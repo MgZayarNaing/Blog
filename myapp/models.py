@@ -4,7 +4,6 @@ import uuid
 from datetime import datetime
 from django.contrib.auth.models import User
 
-
 class HomeModel(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     img = models.ImageField(default=None)
